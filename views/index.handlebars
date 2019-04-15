@@ -1,1 +1,26 @@
-<h1>Hello World</h1>
+<div class="row text-left m-3">
+    <div class="col-md-7">
+
+        <div id="scroller">
+            {{#each dataArticles}}
+            <div class="theArticle my-3" data-id="{{this._id}}">
+                <p class="theTitle m-0 font-weight-bold">{{this.title}}</p>
+                <p class="theLink m-0 font-italic">{{this.link}}</p>
+                <hr class="mr-5">
+            </div>
+            {{/each}}
+        </div>
+
+    </div>
+    <div class="col-md-5">
+        <!-- Form goes here -->
+        <div class="form-group">
+            <h4 id="articleTitleForm">asdasd</h4>
+            <label for="titleInput">Title</label>
+            <input class="form-control" id="titleInput" type="text" placeholder="Title">
+            <label class="mt-2" for="noteTextArea">Note</label>
+            <textarea class="form-control" rows="8" id="noteTextArea" placeholder="Notes"></textarea>
+            <button id="saveNote" class="btn btn-dark mt-3">Save Note</button>
+        </div>
+    </div>
+</div>

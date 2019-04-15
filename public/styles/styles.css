@@ -1,0 +1,9 @@
+body {
+    background-color: #e9ecef;
+}
+
+#scroller {
+    max-height: 450px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
