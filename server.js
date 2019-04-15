@@ -29,7 +29,7 @@ require("./routes/htmlRoutes")(app);
 
 // Connect to MongoDB
 let MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scraper";
-mongoose.connect("mongodb://localhost/scraper", { useNewUrlParser: true });
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 //start server
 app.listen(PORT, () => {
