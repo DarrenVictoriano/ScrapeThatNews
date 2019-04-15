@@ -23,14 +23,25 @@
                 class="text-danger" href="https://www.studentnewsdaily.com/">**beep**</a>.</p>
         <p class="lead">This project uses the following NodeJS framework, cheerio to scrape, axios for HTTP request,
             Handlebars for front end, Express for backend controllers.</p>
-        <a id="scrape-btn" class="btn btn-dark btn-lg" href="/scrape" role="button">Scrape It!</a>
+        {{#if error}}
+        {{> buttons/error}}
+        {{else}}
+        {{#if home}}
+        {{> buttons/index-btn}}
+        {{else}}
+        {{> buttons/save-btn}}
+        {{/if}}
+        {{/if}}
         <hr class="my-4">
 
         <div class="container-fluid">
             {{{body}}}
+
         </div>
 
-
+        <div id="footer" class="container text-center text-secondary">
+            Created by: Darren Victoriano
+        </div>
     </div>
 
 

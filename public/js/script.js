@@ -1,14 +1,14 @@
 // Hide form on load
 $(".form-group").hide();
-$("#scrape-btn").hide();
+//$("#scrape-btn").hide();
 
 // Show Scrape data button if there are not articles yet.
 $.getJSON("/api/article/all", function (data) {
     console.log(data);
     if (!data[0]) {
-        $("#scrape-btn").show();
+        //$("#scrape-btn").show();
     } else {
-        $("#scrape-btn").hide();
+        //$("#scrape-btn").hide();
     }
 });
 

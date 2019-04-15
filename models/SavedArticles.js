@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let ArticleSchema = new Schema({
+let SavedArticleSchema = new Schema({
     title: {
         type: String,
         required: true
@@ -13,9 +13,13 @@ let ArticleSchema = new Schema({
     link: {
         type: String,
         required: true
+    },
+    note: {
+        type: Schema.Types.ObjectId,
+        ref: "Note"
     }
 });
 
-let Article = mongoose.model("Article", ArticleSchema);
+let SavedArticle = mongoose.model("SavedArticle", SavedArticleSchema);
 
-module.exports = Article;
+module.exports = SavedArticle;

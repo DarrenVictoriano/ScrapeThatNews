@@ -8,16 +8,26 @@ module.exports = function (app) {
         // saved the fetched article to mongodb
         db.Article.find({}).then(function (dataArticles) {
             console.log(dataArticles);
-            res.render("index", { dataArticles });
+            res.render("index", { data: dataArticles, home: true });
         }).catch(function (err) {
             console.log(err);
-            res.render("scraped", {});
+        });
+    });
+
+    // Saved Articles
+    app.get("/saved", function (req, res) {
+        // saved the fetched article to mongodb
+        db.Article.find({}).then(function (dataArticles) {
+            console.log(dataArticles);
+            res.render("index", { data: dataArticles, home: false });
+        }).catch(function (err) {
+            console.log(err);
         });
     });
 
     // Incorrect Link
     app.get("*", function (req, res) {
-        res.render("404");
+        res.render("404", { error: true });
     });
 
 }

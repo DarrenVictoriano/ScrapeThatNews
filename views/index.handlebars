@@ -1,21 +1,22 @@
 <div class="row text-left m-3">
-    <div class="col-md-7">
+    <div class="col-md-12">
 
-        <div id="scroller">
-            {{#each dataArticles}}
-            <div class="theArticle my-3" data-id="{{this._id}}">
-                <p class="theTitle m-0 font-weight-bold">{{this.title}}</p>
-                <p class="theSum m-0">{{this.summary}}
+        <div id="scroller" class="mx-auto px-auto">
+            {{#each data}}
+            <div class="theArticle my-3 mx-auto p-4 alert alert-dark" data-id="{{this._id}}">
+                <h4 class="theTitle font-weight-bold">{{this.title}}</h4>
+                <p class="theSum">{{this.summary}}
                     <span class="theLink m-0 font-italic">
                         <a class="text-info" href="{{this.link}}">More info.</a>
                     </span>
                 </p>
-                <hr class="mr-5">
+                <button class="btn btn-dark">Save</button>
             </div>
             {{/each}}
         </div>
 
     </div>
+    {{!-- 
     <div class="col-md-5">
         <!-- Form goes here -->
         <div class="form-group">
@@ -26,5 +27,6 @@
             <textarea class="form-control" rows="8" id="noteTextArea" placeholder="Notes"></textarea>
             <button id="saveNote" class="btn btn-dark mt-3">Save Note</button>
         </div>
-    </div>
+    </div> 
+    --}}
 </div>

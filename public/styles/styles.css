@@ -7,3 +7,7 @@ body {
     overflow: scroll;
     overflow-x: hidden;
 }
+
+.theArticle {
+    max-width: 800px;
+}

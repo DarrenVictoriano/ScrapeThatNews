@@ -39,13 +39,11 @@ module.exports = function (app) {
 
     // Route for getting all the Articles from the DB
     app.get("/api/article/all", function (req, res) {
-
         db.Article.find({}).then(function (dbArticles) {
             res.json(dbArticles);
         }).catch(function (err) {
             res.json(err);
         });
-
     });
 
     // Routes for getting a specific article
@@ -63,7 +61,7 @@ module.exports = function (app) {
     app.post("/api/article/:id", function (req, res) {
         console.log(req.body);
         db.Note.create(req.body).then(function (dbNote) {
-            return db.Article.findOneAndUpdate({ _id: req.params.id },
+            return db.SavedArticle.findOneAndUpdate({ _id: req.params.id },
                 { note: dbNote._id }, { new: true });
         }).then(function (dbArticle) {
             res.json(dbArticle);
