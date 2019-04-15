@@ -10,16 +10,17 @@ module.exports = function (app) {
     // Scrape Data then save it to MongoDB
     app.get("/scrape", function (req, res) {
 
-        axios.get("http://www.echojs.com/").then(function (response) {
+        axios.get("https://www.studentnewsdaily.com/").then(function (response) {
             // Initialize cheerio
             let $ = cheerio.load(response.data);
 
             // find data you want to scrape via element selectors
-            $("article h2").each(function (i, element) {
+            $("div.caption").each(function (i, element) {
                 let result = {};
                 // save the data into result object
-                result.title = $(this).children("a").text();
-                result.link = $(this).children("a").attr("href");
+                result.title = $(this).children("h4").children("a").text();
+                result.summary = $(this).children("p").text();
+                result.link = $(this).children("h4").children("a").attr("href");
 
                 // saved the fetched article to mongodb
                 db.Article.create(result).then(function (dbArticle) {
@@ -28,6 +29,7 @@ module.exports = function (app) {
                     console.log(err);
                     res.render("scraped", {});
                 });
+
             });
         });
         res.redirect("/");

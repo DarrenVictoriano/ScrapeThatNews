@@ -5,7 +5,11 @@
             {{#each dataArticles}}
             <div class="theArticle my-3" data-id="{{this._id}}">
                 <p class="theTitle m-0 font-weight-bold">{{this.title}}</p>
-                <p class="theLink m-0 font-italic">{{this.link}}</p>
+                <p class="theSum m-0">{{this.summary}}
+                    <span class="theLink m-0 font-italic">
+                        <a class="text-info" href="{{this.link}}">More info.</a>
+                    </span>
+                </p>
                 <hr class="mr-5">
             </div>
             {{/each}}
