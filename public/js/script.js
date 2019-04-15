@@ -4,8 +4,8 @@ $("#scrape-btn").hide();
 
 // Show Scrape data button if there are not articles yet.
 $.getJSON("/api/article/all", function (data) {
-    console.log(data.name);
-    if (data.name) {
+    console.log(data);
+    if (!data[0]) {
         $("#scrape-btn").show();
     } else {
         $("#scrape-btn").hide();

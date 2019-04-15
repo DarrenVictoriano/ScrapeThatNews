@@ -25,23 +25,27 @@ module.exports = function (app) {
                 // saved the fetched article to mongodb
                 db.Article.create(result).then(function (dbArticle) {
                     console.log(dbArticle);
+
                 }).catch(function (err) {
                     console.log(err);
-                    res.render("scraped", {});
                 });
 
             });
+        }).catch(function (err) {
+            console.log(err);
         });
         res.redirect("/");
     });
 
     // Route for getting all the Articles from the DB
     app.get("/api/article/all", function (req, res) {
+
         db.Article.find({}).then(function (dbArticles) {
             res.json(dbArticles);
         }).catch(function (err) {
             res.json(err);
         });
+
     });
 
     // Routes for getting a specific article
