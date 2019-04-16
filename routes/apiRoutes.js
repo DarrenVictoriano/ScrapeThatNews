@@ -163,4 +163,17 @@ module.exports = function (app) {
         });
     });
 
+    // Delete One SavedArticle
+    app.get("/api/savedarticle/delete/:id", function (req, res) {
+
+        db.SavedArticle.findByIdAndDelete({
+            _id: req.params.id
+        }).then(function (dbArticle) {
+            console.log(dbArticle);
+        }).catch(function (err) {
+            console.log(err);
+        });
+
+    });
+
 }

@@ -11,3 +11,10 @@ body {
 .theArticle {
     max-width: 800px;
 }
+
+
+#note-wrapper {
+    max-height: 250px;
+    overflow: scroll;
+    overflow-x: hidden;
+}

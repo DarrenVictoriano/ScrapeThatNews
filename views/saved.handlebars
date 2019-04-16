@@ -10,24 +10,59 @@
                         <a class="text-info" href="{{this.link}}">More info.</a>
                     </span>
                 </p>
-                <button class="btn btn-dark" data-id="{{this._id}}">Add Note</button>
-                <button class="btn btn-dark" data-id="{{this._id}}">Delete</button>
+                <button class="btn btn-dark open-modal" data-title="{{this.title}}" data-id="{{this._id}}"
+                    data-toggle="modal" data-target="#noteModal">Add
+                    Note</button>
+                <button class="btn btn-dark delete-saved" data-id="{{this._id}}">Delete</button>
             </div>
             {{/each}}
         </div>
 
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="noteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Notes: <span id="title-notes"></span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Note Divs -->
+                    <div id="note-wrapper" class="mx-auto">
+
+                        <!-- Note Sample -->
+                        <div class="alert alert-dark alert-dismissible fade show" role="alert">
+                            You should check in on some of those fields below.
+
+                            <button id="delete-note" type="button" class="close" data-dismiss="alert"
+                                aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+
+                    </div>
+
+                    <textarea class="form-control" rows="4" id="noteTextArea" placeholder="Add Notes"></textarea>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                    <button type="button" id="add-note" class="btn btn-dark">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     {{!-- 
     <div class="col-md-5">
         <!-- Form goes here -->
-        <div class="form-group">
-            <h4 id="articleTitleForm">asdasd</h4>
-            <label for="titleInput">Title</label>
-            <input class="form-control" id="titleInput" type="text" placeholder="Title">
-            <label class="mt-2" for="noteTextArea">Note</label>
-            <textarea class="form-control" rows="8" id="noteTextArea" placeholder="Notes"></textarea>
-            <button id="saveNote" class="btn btn-dark mt-3">Save Note</button>
-        </div>
+        
     </div> 
     --}}
 </div>

@@ -70,23 +70,30 @@ $(".saveArticle").on("click", function (e) {
 
 });
 
-// Save or Update Notes
-$("#saveNote").on("click", function () {
-    let thisID = $(this).attr("data-id");
+// Delete Saved Article
+$(".delete-saved").on("click", function (e) {
+
+    e.preventDefault();
 
     $.ajax({
-        method: "POST",
-        url: "/api/article/" + thisID,
-        data: {
-            title: $("#titleInput").val(),
-            body: $("#noteTextArea").val()
-        }
+        method: "GET",
+        url: "/api/savedarticle/delete/" + $(this).attr("data-id")
     }).then(function (data) {
         console.log(data);
-
     });
-    // emtpy and hide the form
-    $("#titleInput").val("");
-    $("#noteTextArea").val("");
-    $(".form-group").hide();
+
+    $(this).parents('.theArticle').fadeOut();
+
+});
+
+// Open modal then pass title
+$(".open-modal").on("click", function () {
+    $("#title-notes").text($(this).attr("data-title"));
+});
+
+// Save or Update Notes
+$("#add-note").on("click", function () {
+
+    alert("zing");
+
 });
