@@ -15,7 +15,7 @@ app.use(logger("dev"));
 const mongoose = require('mongoose');
 
 // Initialize Port
-let PORT = 3030;
+let PORT = process.env.PORT || 3030;
 
 // Middlewares
 app.use(express.urlencoded({ extended: true }));
