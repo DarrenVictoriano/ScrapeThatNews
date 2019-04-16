@@ -3,14 +3,14 @@
 
         <div id="scroller" class="mx-auto px-auto">
             {{#each data}}
-            <div class="theArticle my-3 mx-auto p-4 alert alert-dark" data-id="{{this._id}}">
+            <div class="theArticle my-3 mx-auto p-4 alert alert-dark">
                 <h4 class="theTitle font-weight-bold">{{this.title}}</h4>
                 <p class="theSum">{{this.summary}}
                     <span class="theLink m-0 font-italic">
                         <a class="text-info" href="{{this.link}}">More info.</a>
                     </span>
                 </p>
-                <button class="btn btn-dark">Save</button>
+                <button class="btn btn-dark saveArticle" data-id="{{this._id}}">Save</button>
             </div>
             {{/each}}
         </div>

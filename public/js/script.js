@@ -12,30 +12,61 @@ $.getJSON("/api/article/all", function (data) {
     }
 });
 
-// Article click event to view Notes
-$(".theArticle").on("click", function () {
-    let thisID = $(this).attr("data-id");
-    $("#saveNote").attr("data-id", thisID);
+// Scrape
+$("#scrape-btn").on("click", function (e) {
+    e.preventDefault();
 
     $.ajax({
         method: "GET",
-        url: "/api/article/" + thisID
+        url: "/api/article/delete/all"
     }).then(function (data) {
-        // show the form with title
-        $(".form-group").show();
-        $("#articleTitleForm").text(data.title);
+        console.log(data);
+        $.ajax({
+            method: "GET",
+            url: "/scrape"
+        }).then(function (data) {
+            console.log(data);
+            window.location.replace("/");
+        });
 
-        console.log(data.note);
-
-        // populate form with the data
-        if (data.note) {
-            $("#titleInput").val(data.note.title);
-            $("#noteTextArea").val(data.note.body);
-        } else {
-            $("#titleInput").val("");
-            $("#noteTextArea").val("");
-        }
     });
+
+});
+
+// Save article to SavedArticleDB
+$(".saveArticle").on("click", function (e) {
+    e.preventDefault();
+
+    $.ajax({
+        method: "GET",
+        url: "/api/article/" + $(this).attr("data-id")
+    }).then(function (data) {
+        console.log(data);
+
+        $.ajax({
+            method: "POST",
+            url: "/api/savedarticle/add",
+            data: {
+                title: data.title,
+                summary: data.summary,
+                link: data.link
+            }
+        }).then(function (data) {
+            console.log(data);
+        });
+
+    });
+
+    $.ajax({
+        method: "GET",
+        url: "/api/article/delete/" + $(this).attr("data-id")
+    }).then(function (data) {
+        console.log(data);
+
+    });
+
+    $(this).parents('.theArticle').fadeOut();
+
 
 });
 

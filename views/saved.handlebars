@@ -1,1 +1,33 @@
-<h1>hi</h1>
+<div class="row text-left m-3">
+    <div class="col-md-12">
+
+        <div id="scroller" class="mx-auto px-auto">
+            {{#each data}}
+            <div class="theArticle my-3 mx-auto p-4 alert alert-dark" data-id="{{this._id}}">
+                <h4 class="theTitle font-weight-bold">{{this.title}}</h4>
+                <p class="theSum">{{this.summary}}
+                    <span class="theLink m-0 font-italic">
+                        <a class="text-info" href="{{this.link}}">More info.</a>
+                    </span>
+                </p>
+                <button class="btn btn-dark" data-id="{{this._id}}">Add Note</button>
+                <button class="btn btn-dark" data-id="{{this._id}}">Delete</button>
+            </div>
+            {{/each}}
+        </div>
+
+    </div>
+    {{!-- 
+    <div class="col-md-5">
+        <!-- Form goes here -->
+        <div class="form-group">
+            <h4 id="articleTitleForm">asdasd</h4>
+            <label for="titleInput">Title</label>
+            <input class="form-control" id="titleInput" type="text" placeholder="Title">
+            <label class="mt-2" for="noteTextArea">Note</label>
+            <textarea class="form-control" rows="8" id="noteTextArea" placeholder="Notes"></textarea>
+            <button id="saveNote" class="btn btn-dark mt-3">Save Note</button>
+        </div>
+    </div> 
+    --}}
+</div>
