@@ -124,7 +124,7 @@ module.exports = function (app) {
 
         db.Note.create(req.body).then(function (dbNote) {
             return db.SavedArticle.findOneAndUpdate({ _id: req.params.id },
-                { note: dbNote._id }, { new: true });
+                { $push: { note: dbNote._id } }, { new: true }).populate("note");
         }).then(function (dbArticle) {
             res.json(dbArticle);
         }).catch(function (err) {
@@ -132,6 +132,7 @@ module.exports = function (app) {
         });
     });
 
+    // add article to savedarticledb
     app.post("/api/savedarticle/add", function (req, res) {
         // saved the fetched article to Article Collection
         console.log(req.body);
@@ -172,6 +173,19 @@ module.exports = function (app) {
             console.log(dbArticle);
         }).catch(function (err) {
             console.log(err);
+        });
+
+    });
+
+    // Delete Note from SavedArticle
+    app.get("/api/savedarticle/note/delete/:id", function (req, res) {
+
+        db.Note.findByIdAndDelete({
+            _id: req.params.id
+        }).then(function (dbNote) {
+            console.log(dbNote);
+        }).catch(function (err) {
+            console.log(err)
         });
 
     });

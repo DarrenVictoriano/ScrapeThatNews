@@ -17,7 +17,7 @@ module.exports = function (app) {
     // Saved Articles
     app.get("/savedarticle", function (req, res) {
         // saved the fetched article to mongodb
-        db.SavedArticle.find({}).then(function (dbSavedArticles) {
+        db.SavedArticle.find({}).populate("note").then(function (dbSavedArticles) {
             console.log(dbSavedArticles);
             res.render("saved", { data: dbSavedArticles, home: false });
         }).catch(function (err) {

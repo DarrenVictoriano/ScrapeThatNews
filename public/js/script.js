@@ -12,6 +12,33 @@ $.getJSON("/api/article/all", function (data) {
     }
 });
 
+function createNoteDiv(body, id) {
+
+    let noteDiv = $("<div>");
+    noteDiv.addClass("alert alert-dark alert-dismissible fade show");
+    noteDiv.attr("role", "alert");
+    noteDiv.text(body);
+
+    // Delete button to delete the note
+    let deleteNote = $("<button>");
+    deleteNote.addClass("delete-note");
+    deleteNote.attr("type", "button");
+    deleteNote.attr("data-dismiss", "alert");
+    deleteNote.attr("aria-label", "Close");
+    deleteNote.attr("data-id", id);
+    deleteNote.addClass("close");
+
+    let closeIcon = $("<span>");
+    closeIcon.attr("aria-hidden", "true");
+    closeIcon.text("×");
+
+    // append elements 
+    closeIcon.appendTo(deleteNote);
+    deleteNote.appendTo(noteDiv);
+    noteDiv.appendTo($("#note-wrapper"));
+
+};
+
 // Scrape
 $("#scrape-btn").on("click", function (e) {
     e.preventDefault();
@@ -88,12 +115,56 @@ $(".delete-saved").on("click", function (e) {
 
 // Open modal then pass title
 $(".open-modal").on("click", function () {
+
     $("#title-notes").text($(this).attr("data-title"));
+    $("#add-note").attr("data-id", $(this).attr("data-id"));
+    $("#note-wrapper").empty();
+
+    $.ajax({
+        method: "GET",
+        url: "/api/savedarticle/" + $(this).attr("data-id")
+    }).then(function (data) {
+        console.log(data);
+        // Div that holds the note
+        for (i in data.note) {
+            createNoteDiv(data.note[i].body, data.note[i]._id);
+        }
+
+
+    });
+
 });
 
 // Save or Update Notes
 $("#add-note").on("click", function () {
 
-    alert("zing");
+    let noteTextArea = $("#noteTextArea").val();
+
+    $.ajax({
+        method: "POST",
+        url: "/api/savedarticle/note/" + $(this).attr("data-id"),
+        data: {
+            body: noteTextArea
+        }
+    }).then(function (data) {
+        $("#note-wrapper").empty();
+        for (i in data.note) {
+            createNoteDiv(data.note[i].body, data.note[i]._id);
+        }
+    });
+
+    $("#noteTextArea").val("");
+
+});
+
+// Delete Note
+$("body").on("click", ".delete-note", function () {
+
+    $.ajax({
+        method: "GET",
+        url: "/api/savedarticle/note/delete/" + $(this).attr("data-id")
+    }).then(function (data) {
+        console.log(data);
+    });
 
 });

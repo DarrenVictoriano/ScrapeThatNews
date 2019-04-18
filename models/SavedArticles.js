@@ -14,10 +14,10 @@ let SavedArticleSchema = new Schema({
         type: String,
         required: true
     },
-    note: {
+    note: [{
         type: Schema.Types.ObjectId,
         ref: "Note"
-    }
+    }]
 });
 
 let SavedArticle = mongoose.model("SavedArticle", SavedArticleSchema);
